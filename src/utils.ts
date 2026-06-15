@@ -327,7 +327,6 @@ export class Context {
             const res = getPropertyValue(pVal, lookupPath);
             if (res !== undefined) {
               foundValue = res;
-              resolved = true;
               break;
             }
           }

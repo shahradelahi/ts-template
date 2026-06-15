@@ -65,7 +65,6 @@ class Scanner {
         this.#tail = '';
         break;
       case 0:
-        match = '';
         break;
       default:
         match = this.#tail.substring(0, index);
@@ -128,8 +127,8 @@ export function tokenize(template: string, initialTags: [string, string] = ['{{'
     const tagStartPos = scanner.pos - currentTags[0].length;
 
     // Check if it is a block, inverted, partial, raw, comment, delimiter change, or standard tag
-    let type: TokenType = 'Interpolation';
-    let rawContent = '';
+    let type: TokenType;
+    let rawContent: string;
 
     // Look at first character of the tag
     const firstChar = scanner.scan(/#|\^|\/|>|\{|&|=|!/);
