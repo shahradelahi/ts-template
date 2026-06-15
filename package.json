@@ -1,6 +1,6 @@
 {
   "name": "@se-oss/template",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "High-performance, async-first templating engine with built-in filters and TypeScript type safety.",
   "keywords": [
     "mustache",
