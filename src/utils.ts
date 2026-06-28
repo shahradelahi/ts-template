@@ -1,4 +1,4 @@
-const BLACKLIST = new Set(['__proto__', 'constructor', 'prototype']);
+import { safeGet } from '@se-oss/safe-get';
 
 const entityMap: Record<string, string> = {
   '&': '&amp;',
@@ -29,55 +29,6 @@ export function escapeHtml(string: any): string {
  */
 export function escapeRegExp(string: string): string {
   return string.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-}
-
-/**
- * Safely retrieves a nested property value from an object using a dot-notation path.
- *
- * @example
- * const value = getPropertyValue({ user: { name: 'Alice' } }, 'user.name');
- */
-export function getPropertyValue(obj: any, path: string): any {
-  if (obj === null || obj === undefined) {
-    return undefined;
-  }
-
-  const parts = path.replace(/\?/g, '').split('.');
-  let current = obj;
-
-  for (const part of parts) {
-    if (current === null || current === undefined) {
-      return undefined;
-    }
-
-    if (BLACKLIST.has(part)) {
-      return undefined;
-    }
-
-    if (typeof current !== 'object' && typeof current !== 'function') {
-      try {
-        current = (current as any)[part];
-      } catch {
-        return undefined;
-      }
-    } else {
-      if (part in current) {
-        current = current[part];
-      } else {
-        return undefined;
-      }
-    }
-  }
-
-  if (typeof current === 'function') {
-    let parentObj = obj;
-    if (parts.length > 1) {
-      parentObj = getPropertyValue(obj, parts.slice(0, -1).join('.'));
-    }
-    return current.call(parentObj);
-  }
-
-  return current;
 }
 
 /**
@@ -312,7 +263,7 @@ export class Context {
       // First check this context
       const val = this.#view;
       if (val !== null && val !== undefined) {
-        const res = getPropertyValue(val, lookupPath);
+        const res = safeGet(val, lookupPath);
         if (res !== undefined) {
           foundValue = res;
           resolved = true;
@@ -324,7 +275,7 @@ export class Context {
         while (currentContext) {
           const pVal = currentContext.#view;
           if (pVal !== null && pVal !== undefined) {
-            const res = getPropertyValue(pVal, lookupPath);
+            const res = safeGet(pVal, lookupPath);
             if (res !== undefined) {
               foundValue = res;
               break;
