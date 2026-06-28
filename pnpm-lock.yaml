@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@se-oss/safe-get':
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@changesets/cli':
         specifier: ^2.29.8
@@ -701,6 +705,9 @@ packages:
     resolution: {integrity: sha512-QVTUovf40zgTqlFVrKA1uXMVvU2QWEFWfAH8Wdc48IxLvrJMQVMBRjuQyUpzZCDkakImib9eVazbWlC6ksWtJw==}
     cpu: [x64]
     os: [win32]
+
+  '@se-oss/safe-get@1.0.0':
+    resolution: {integrity: sha512-C4mQTP7s3WlnF+B0PYDsCz/OFKbbLN9bwHwlqq71q/hsmtzr+GoPVvtWWIzpnjpkoPVUrmCbFVQ0CqGV/w2fJQ==}
 
   '@shahrad/eslint-config@1.1.0':
     resolution: {integrity: sha512-6vUFWX4nulHhK8MaMUafb/AOGWIZqvGircIaLPg6o2m5NmOsgJ655s84pcsvpNBaA5fL6hSJsaNwu9acWBz9Ig==}
@@ -2260,6 +2267,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.60.4':
     optional: true
+
+  '@se-oss/safe-get@1.0.0': {}
 
   '@shahrad/eslint-config@1.1.0(eslint@10.5.0(jiti@2.5.1))(typescript@6.0.3)':
     dependencies:

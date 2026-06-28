@@ -46,6 +46,9 @@
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@shahrad/prettier-config",
+  "dependencies": {
+    "@se-oss/safe-get": "^1.0.0"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
     "@shahrad/eslint-config": "^1.1.0",
